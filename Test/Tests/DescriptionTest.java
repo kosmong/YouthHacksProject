@@ -8,6 +8,7 @@ import static org.junit.Assert.fail;
 
 public class DescriptionTest {
     private Description description;
+
     private static final String NAME = "New language";
     private static final int YEAR = 0;
     private static final int MONTH = 3;
@@ -19,7 +20,7 @@ public class DescriptionTest {
     }
 
     @Test
-    public void testSetters() {
+    public void testGettersAndSetters() {
         assertTrue(description.getName() == NAME);
         assertTrue(description.getDescription() == "");
         assertTrue(description.getTime().getYear() == 0);

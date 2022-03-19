@@ -1,6 +1,7 @@
 package model;
 
 import exceptions.LanguageAlreadyRecordedException;
+import exceptions.LanguageNotRecordedException;
 
 import java.util.HashMap;
 
@@ -21,5 +22,13 @@ public class CodingLanguages {
 
     public boolean containsLanguage(String language) {
         return codingLanguages.containsKey(language);
+    }
+
+    public Description getLanguageDescription(String language) throws LanguageNotRecordedException{
+        if (codingLanguages.get(language) == null) {
+            throw new LanguageNotRecordedException();
+        } else {
+            return codingLanguages.get(language);
+        }
     }
 }
