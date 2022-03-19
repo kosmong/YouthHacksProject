@@ -1,3 +1,6 @@
+package model;
+
+import exceptions.LanguageAlreadyRecordedException;
 
 import java.util.HashMap;
 
@@ -8,11 +11,15 @@ public class CodingLanguages {
         codingLanguages = new HashMap<String, Descriptions>();
     }
 
-    public void addLanguage(String language) {
+    public void addLanguage(String language) throws LanguageAlreadyRecordedException {
         if (codingLanguages.containsKey(language)) {
-            // throw languageAlreadyRecordedException;
+            throw new LanguageAlreadyRecordedException();
         } else {
             codingLanguages.put(language, new Descriptions(language));
         }
+    }
+
+    public boolean containsLanguage(String language) {
+        return codingLanguages.containsKey(language);
     }
 }

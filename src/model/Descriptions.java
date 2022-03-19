@@ -1,3 +1,5 @@
+package model;
+
 public class Descriptions {
     private String language;
     private AmountTime time;
