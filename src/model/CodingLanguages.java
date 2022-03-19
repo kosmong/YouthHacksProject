@@ -6,17 +6,17 @@ import exceptions.LanguageNotRecordedException;
 import java.util.HashMap;
 
 public class CodingLanguages {
-    private HashMap<String, Description> codingLanguages;
+    private HashMap<String, CodingLanguage> codingLanguages;
 
     public CodingLanguages() {
-        codingLanguages = new HashMap<String, Description>();
+        codingLanguages = new HashMap<>();
     }
 
     public void addLanguage(String language) throws LanguageAlreadyRecordedException {
         if (codingLanguages.containsKey(language)) {
             throw new LanguageAlreadyRecordedException();
         } else {
-            codingLanguages.put(language, new Description(language));
+            codingLanguages.put(language, new CodingLanguage(language));
         }
     }
 
@@ -24,7 +24,7 @@ public class CodingLanguages {
         return codingLanguages.containsKey(language);
     }
 
-    public Description getLanguageDescription(String language) throws LanguageNotRecordedException{
+    public CodingLanguage getLanguage(String language) throws LanguageNotRecordedException{
         if (codingLanguages.get(language) == null) {
             throw new LanguageNotRecordedException();
         } else {
