@@ -9,6 +9,14 @@ public class AmountTime {
         this.month = month;
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
     public void setYear(int year) {
         this.year = year;
     }

@@ -5,17 +5,17 @@ import exceptions.LanguageAlreadyRecordedException;
 import java.util.HashMap;
 
 public class CodingLanguages {
-    private HashMap<String, Descriptions> codingLanguages;
+    private HashMap<String, Description> codingLanguages;
 
     public CodingLanguages() {
-        codingLanguages = new HashMap<String, Descriptions>();
+        codingLanguages = new HashMap<String, Description>();
     }
 
     public void addLanguage(String language) throws LanguageAlreadyRecordedException {
         if (codingLanguages.containsKey(language)) {
             throw new LanguageAlreadyRecordedException();
         } else {
-            codingLanguages.put(language, new Descriptions(language));
+            codingLanguages.put(language, new Description(language));
         }
     }
 
