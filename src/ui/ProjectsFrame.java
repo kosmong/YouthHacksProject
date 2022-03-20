@@ -108,6 +108,7 @@ public class ProjectsFrame extends JFrame implements ActionListener {
         panel.add(describe);
 
         setEditMenu(panel, description);
+        //setCodeMenu();
 
         panel.setVisible(true);
     }
@@ -125,6 +126,10 @@ public class ProjectsFrame extends JFrame implements ActionListener {
         parent.setJMenuBar(bar);
     }
 
+//    protected void setCodeMenu() {
+//
+//    }
+
 
 
     private class EditTime implements ActionListener {
@@ -138,8 +143,8 @@ public class ProjectsFrame extends JFrame implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String year = JOptionPane.showInputDialog("Amount of experience in years");
-            String month = JOptionPane.showInputDialog("Amount experience in months");
+            String year = JOptionPane.showInputDialog("Time spent on project in years");
+            String month = JOptionPane.showInputDialog("Time spent on project in months");
 
             try {
                 int y = Integer.parseInt(year);

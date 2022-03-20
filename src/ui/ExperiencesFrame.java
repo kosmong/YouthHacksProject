@@ -223,8 +223,8 @@ public class ExperiencesFrame extends JFrame implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String year = JOptionPane.showInputDialog("Amount of experience in years");
-            String month = JOptionPane.showInputDialog("Amount experience in months");
+            String year = JOptionPane.showInputDialog("Length of involvement in years");
+            String month = JOptionPane.showInputDialog("Length of involvement in months");
 
             try {
                 int y = Integer.parseInt(year);
