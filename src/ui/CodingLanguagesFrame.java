@@ -2,6 +2,7 @@ package ui;
 
 import exceptions.LanguageAlreadyRecordedException;
 import exceptions.LanguageNotRecordedException;
+import model.Description;
 import model.ResumeOrganizer;
 
 import javax.swing.*;
@@ -23,10 +24,13 @@ public class CodingLanguagesFrame extends JFrame {
         super("Coding Languages");
         this.organizer = organizer;
         languageModel = new DefaultListModel<>();
+        putAllLangOnList();
+
 
         initComponents();
 
         setSize(WIDTH, HEIGHT);
+        //setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
@@ -80,9 +84,80 @@ public class CodingLanguagesFrame extends JFrame {
         String language = JOptionPane.showInputDialog(this, "Enter language");
 
         try {
-            organizer.findLanguage(language);
+            displayDescription(organizer.findLanguage(language).getDescription());
+
         } catch (LanguageNotRecordedException e) {
             JOptionPane.showMessageDialog(this, "Language not recorded");
+        }
+    }
+
+    protected void displayDescription(Description description) {
+        JFrame panel = new JFrame(description.getName());
+        panel.setSize(400, 400);
+        panel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+
+        JLabel name = new JLabel(description.getName());
+        panel.add(name);
+
+        JLabel time = new JLabel(description.getTime().getYear() + " Years, " + description.getTime().getMonth() + " Months");
+        panel.add(time);
+
+        JLabel describe = new JLabel(description.getDescription());
+        panel.add(describe);
+
+        setEditMenu(panel, description);
+
+        panel.setVisible(true);
+    }
+
+    protected void setEditMenu(JFrame parent, Description description) {
+        JMenuBar bar = new JMenuBar();
+        JMenu menu = new JMenu("Edit");
+        JMenuItem editTime = new JMenuItem("Time");
+        JMenuItem editDescription = new JMenuItem("Description");
+        editTime.addActionListener(new EditTime(description, parent));
+        editDescription.addActionListener(new EditDescription(description, parent));
+        menu.add(editTime);
+        menu.add(editDescription);
+        bar.add(menu);
+        parent.setJMenuBar(bar);
+    }
+
+    private class EditTime implements ActionListener {
+        private Description d;
+        private JFrame p;
+
+        public EditTime(Description description, JFrame parent) {
+            d = description;
+            p = parent;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        }
+    }
+
+    private class EditDescription implements ActionListener {
+        private  Description d;
+        private JFrame parent;
+
+        public EditDescription(Description description, JFrame parent) {
+            d = description;
+            this.parent = parent;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String newDescription = JOptionPane.showInputDialog("Put new description here");
+            d.setDescription(newDescription);
+            parent.dispose();
+            displayDescription(d);
+        }
+    }
+
+    protected void putAllLangOnList() {
+        for (String language: organizer.getLanguages().getCodingLanguages().keySet()) {
+            languageModel.addElement(language);
         }
     }
 }

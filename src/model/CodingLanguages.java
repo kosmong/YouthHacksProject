@@ -4,6 +4,7 @@ import exceptions.LanguageAlreadyRecordedException;
 import exceptions.LanguageNotRecordedException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class CodingLanguages {
     private HashMap<String, CodingLanguage> codingLanguages;
@@ -37,5 +38,9 @@ public class CodingLanguages {
 
     public boolean noLanguage() {
         return codingLanguages.isEmpty();
+    }
+
+    public Map<String, CodingLanguage> getCodingLanguages() {
+        return codingLanguages;
     }
 }
