@@ -65,7 +65,9 @@ public class Description {
 
         if (!name.equals(that.name)) return false;
         if (!time.equals(that.time)) return false;
-        return description.equals(that.description);
+        if (!description.equals(that.description)) return false;
+        if (!hardSkills.equals(that.hardSkills)) return false;
+        return softSkills.equals(that.softSkills);
     }
 
     @Override
@@ -73,6 +75,8 @@ public class Description {
         int result = name.hashCode();
         result = 31 * result + time.hashCode();
         result = 31 * result + description.hashCode();
+        result = 31 * result + hardSkills.hashCode();
+        result = 31 * result + softSkills.hashCode();
         return result;
     }
 }

@@ -19,5 +19,8 @@ public class Projects {
         return projects.get(projectName);
     }
 
+    public Boolean noProject() {
+        return projects.isEmpty();
+    }
 
 }

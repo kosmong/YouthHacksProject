@@ -1,10 +1,11 @@
 package Tests;
 import model.Description;
+import model.HardSkillTags;
+import model.SoftSkillTags;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class DescriptionTest {
     private Description description;
@@ -32,5 +33,41 @@ public class DescriptionTest {
 
         description.setDescription(DESCRIBE);
         assertTrue(description.getDescription() == DESCRIBE);
+    }
+
+    @Test
+    public void testMultipleEdits() {
+        Description result = new Description(NAME);
+        assertEquals(description, result);
+
+        result.addHardSkill(HardSkillTags.CODINGLANGUAGE);
+        result.addSoftSkill(SoftSkillTags.LEADERSHIP);
+        result.addSoftSkill(SoftSkillTags.TEAMENVIRONMENT);
+
+        description.addHardSkill(HardSkillTags.CODINGLANGUAGE);
+        description.addSoftSkill(SoftSkillTags.LEADERSHIP);
+        description.addSoftSkill(SoftSkillTags.TEAMENVIRONMENT);
+
+        assertEquals(description, result);
+
+        result.setDescription(DESCRIBE);
+        description.setDescription(DESCRIBE);
+
+        assertEquals(description, result);
+
+        result.setDescription("meow");
+        description.setDescription("meow");
+
+        assertEquals(description, result);
+
+        result.setTime(YEAR, MONTH);
+        description.setTime(YEAR, MONTH);
+
+        assertEquals(description, result);
+
+        result.setTime(MONTH, YEAR);
+        description.setTime(MONTH, YEAR);
+
+        assertEquals(description, result);
     }
 }

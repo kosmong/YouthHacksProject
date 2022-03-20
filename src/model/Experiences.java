@@ -1,14 +1,15 @@
 package model;
 
 import exceptions.ExperienceAlreadyRecordedException;
+import exceptions.ExperienceNotRecordedException;
 import sun.security.krb5.internal.crypto.Des;
 
 import java.util.HashMap;
 
 public class Experiences {
-    public HashMap<String, Description> workExperience;
-    public HashMap<String, Description> volunteerExperience;
-    public HashMap<String, Description> extracurriculars;
+    private HashMap<String, Description> workExperience;
+    private HashMap<String, Description> volunteerExperience;
+    private HashMap<String, Description> extracurriculars;
 
     public Experiences() {
         workExperience = new HashMap<>();
@@ -46,6 +47,33 @@ public class Experiences {
         }
     }
 
+    public Description findWorkExperience(String companyName) throws ExperienceNotRecordedException {
+        Description description = workExperience.get(companyName);
+        if (description == null) {
+            throw new ExperienceNotRecordedException();
+        } else {
+            return description;
+        }
+    }
+
+    public Description findVolunteerExperience(String organizationName) throws ExperienceNotRecordedException {
+        Description description = volunteerExperience.get(organizationName);
+        if (description == null) {
+            throw new ExperienceNotRecordedException();
+        } else {
+            return description;
+        }
+    }
+
+    public Description findExtracurricular(String extracurricularName) throws ExperienceNotRecordedException {
+        Description description = extracurriculars.get(extracurricularName);
+        if (description == null) {
+            throw new ExperienceNotRecordedException();
+        } else {
+            return description;
+        }
+    }
+
     public boolean noWorkExperience() {
         return workExperience.isEmpty();
     }
@@ -54,12 +82,12 @@ public class Experiences {
         return volunteerExperience.isEmpty();
     }
 
-    public boolean noExtrcurriculars() {
+    public boolean noExtracurriculars() {
         return extracurriculars.isEmpty();
     }
 
     public boolean allEmpty() {
-        return noWorkExperience() && noVolunteerExperience() && noExtrcurriculars();
+        return noWorkExperience() && noVolunteerExperience() && noExtracurriculars();
     }
 
 }

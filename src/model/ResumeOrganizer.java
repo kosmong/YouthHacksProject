@@ -5,9 +5,9 @@ import exceptions.LanguageAlreadyRecordedException;
 import exceptions.LanguageNotRecordedException;
 
 public class ResumeOrganizer {
-    public CodingLanguages languages;
-    public Experiences experiences;
-    public Projects projects;
+    private CodingLanguages languages;
+    private Experiences experiences;
+    private Projects projects;
 
     public ResumeOrganizer() {
         languages = new CodingLanguages();
@@ -42,5 +42,9 @@ public class ResumeOrganizer {
         } else {
             language.addProject(myProject);
         }
+    }
+
+    public boolean allEmpty() {
+        return languages.noLanguage() && experiences.allEmpty() && projects.noProject();
     }
 }

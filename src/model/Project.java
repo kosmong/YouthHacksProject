@@ -24,4 +24,24 @@ public class Project {
     public String getCodingLanguage() {
         return codingLanguage;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Project)) return false;
+
+        Project project = (Project) o;
+
+        if (!projectName.equals(project.projectName)) return false;
+        if (!description.equals(project.description)) return false;
+        return codingLanguage.equals(project.codingLanguage);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = projectName.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + codingLanguage.hashCode();
+        return result;
+    }
 }

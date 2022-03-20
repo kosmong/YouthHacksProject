@@ -31,4 +31,8 @@ public class CodingLanguages {
             return codingLanguages.get(language);
         }
     }
+
+    public boolean noLanguage() {
+        return codingLanguages.isEmpty();
+    }
 }
