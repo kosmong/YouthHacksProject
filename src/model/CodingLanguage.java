@@ -11,7 +11,16 @@ public class CodingLanguage {
     public CodingLanguage(String language) {
         this.language = language;
         this.description = new Description(language);
+        this.description.addHardSkill(HardSkillTags.CODINGLANGUAGE);
         this.projects = new HashSet<>();
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public Description getDescription() {
+        return description;
     }
 
     public void addProject(Project project) {

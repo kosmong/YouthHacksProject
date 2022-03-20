@@ -1,6 +1,7 @@
 package model;
 
 import exceptions.ExperienceAlreadyRecordedException;
+import sun.security.krb5.internal.crypto.Des;
 
 import java.util.HashMap;
 
@@ -19,7 +20,9 @@ public class Experiences {
         if (workExperience.containsKey(companyName)) {
             throw new ExperienceAlreadyRecordedException();
         } else {
-            workExperience.put(companyName, new Description(companyName));
+            Description description = new Description(companyName);
+            description.addHardSkill(HardSkillTags.WORKEXPERIENCE);
+            workExperience.put(companyName, description);
         }
     }
 
@@ -27,15 +30,19 @@ public class Experiences {
         if (volunteerExperience.containsKey(organizationName)) {
             throw new ExperienceAlreadyRecordedException();
         } else {
-            volunteerExperience.put(organizationName, new Description(organizationName));
+            Description description = new Description(organizationName);
+            description.addHardSkill(HardSkillTags.VOLUNTEEREXPERIENCE);
+            volunteerExperience.put(organizationName, description);
         }
     }
 
-    public void addExtracurricular(String extracurricularType) throws ExperienceAlreadyRecordedException{
-        if (extracurriculars.containsKey(extracurricularType)) {
+    public void addExtracurricular(String extracurricularName) throws ExperienceAlreadyRecordedException{
+        if (extracurriculars.containsKey(extracurricularName)) {
             throw new ExperienceAlreadyRecordedException();
         } else {
-            extracurriculars.put(extracurricularType, new Description(extracurricularType));
+            Description description = new Description(extracurricularName);
+            description.addHardSkill(HardSkillTags.EXTRACURRICULARS);
+            extracurriculars.put(extracurricularName, description);
         }
     }
 
