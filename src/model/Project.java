@@ -9,7 +9,7 @@ public class Project {
 
     public Project(String projectName, String language) {
         this.projectName = projectName;
-        description = new Description(projectName);
+        description = new Description(projectName + ", " + language);
         codingLanguage = language;
     }
 

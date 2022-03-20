@@ -4,6 +4,9 @@ import model.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 
 public class ResumeOrganizerTest {
@@ -23,13 +26,14 @@ public class ResumeOrganizerTest {
 
         CodingLanguage resultLanguage = new CodingLanguage(JAVA);
         String work = "work";
-        Description resultExperience = new Description(work);
+        String cat = "cat";
+        Description resultExperience = new Description(work + ", " + cat);
         resultExperience.addHardSkill(HardSkillTags.WORKEXPERIENCE);
         Project resultProject = new Project(PROJECTNAME, JAVA);
 
         try {
             organizer.addCodingLanguage(JAVA);
-            organizer.addExperience(HardSkillTags.WORKEXPERIENCE, work);
+            organizer.addExperience(HardSkillTags.WORKEXPERIENCE, work, cat);
             organizer.addProject(PROJECTNAME, JAVA);
         } catch (LanguageAlreadyRecordedException | ExperienceAlreadyRecordedException | LanguageNotRecordedException |
                 ProjectAlreadyRecordedException | ProjectNotRecordedException e) {
@@ -39,8 +43,8 @@ public class ResumeOrganizerTest {
         resultLanguage.addProject(resultProject);
         try {
             assertEquals(organizer.findLanguage(JAVA), resultLanguage);
-            assertEquals(organizer.findExperience(HardSkillTags.WORKEXPERIENCE, work), resultExperience);
-            assertEquals(organizer.findProject(PROJECTNAME), resultProject);
+            assertEquals(organizer.findExperience(HardSkillTags.WORKEXPERIENCE, work, cat).getDescription(), resultExperience);
+            assertEquals(organizer.findProject(PROJECTNAME, JAVA), resultProject);
         } catch (LanguageNotRecordedException | ExperienceNotRecordedException | ProjectNotRecordedException e) {
             fail("exception not expected");
         }
@@ -61,13 +65,26 @@ public class ResumeOrganizerTest {
 
         Project resultProject2 = new Project(PROJECTNAME, JAVA);
         CodingLanguage resultLanguage2 = new CodingLanguage(JAVA);
-        resultLanguage1.addProject(resultProject2);
+        resultLanguage2.addProject(resultProject2);
+        Set<Project> resultProjects = new HashSet<>();
+        resultProjects.add(resultProject1);
+        resultProjects.add(resultProject2);
 
         try {
             organizer.addProject(PROJECTNAME, JAVA);
+            organizer.findLanguage(JAVA);
             assertEquals(organizer.findLanguage(JAVA), resultLanguage2);
+            assertEquals(organizer.findProjects(PROJECTNAME), resultProjects);
         } catch (LanguageNotRecordedException | ProjectNotRecordedException | ProjectAlreadyRecordedException | LanguageAlreadyRecordedException e) {
             fail("exception not expected");
+        }
+
+        try {
+            organizer.addProject(PROJECTNAME, CPLUS);
+            fail("project already exception expected");
+        } catch (LanguageNotRecordedException | LanguageAlreadyRecordedException | ProjectNotRecordedException e) {
+            fail("these exceptions not expected");
+        } catch (ProjectAlreadyRecordedException e) {
         }
     }
 }

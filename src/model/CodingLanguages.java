@@ -12,6 +12,7 @@ public class CodingLanguages {
         codingLanguages = new HashMap<>();
     }
 
+    // put language in map if it does not exist
     public void addLanguage(String language) throws LanguageAlreadyRecordedException {
         if (codingLanguages.containsKey(language)) {
             throw new LanguageAlreadyRecordedException();
@@ -20,10 +21,12 @@ public class CodingLanguages {
         }
     }
 
+    // true if map contains given language
     public boolean containsLanguage(String language) {
         return codingLanguages.containsKey(language);
     }
 
+    // find and return language if it is in map
     public CodingLanguage findLanguage(String language) throws LanguageNotRecordedException{
         if (codingLanguages.get(language) == null) {
             throw new LanguageNotRecordedException();
