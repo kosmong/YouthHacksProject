@@ -20,4 +20,8 @@ public class Project {
     public Description getDescription() {
         return description;
     }
+
+    public String getCodingLanguage() {
+        return codingLanguage;
+    }
 }
