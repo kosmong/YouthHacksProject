@@ -26,4 +26,24 @@ public class CodingLanguage {
     public void addProject(Project project) {
         projects.add(project);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CodingLanguage)) return false;
+
+        CodingLanguage language1 = (CodingLanguage) o;
+
+        if (!language.equals(language1.language)) return false;
+        if (!description.equals(language1.description)) return false;
+        return projects.equals(language1.projects);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = language.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + projects.hashCode();
+        return result;
+    }
 }

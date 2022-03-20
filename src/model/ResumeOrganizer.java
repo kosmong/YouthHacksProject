@@ -1,8 +1,6 @@
 package model;
 
-import exceptions.ExperienceAlreadyRecordedException;
-import exceptions.LanguageAlreadyRecordedException;
-import exceptions.LanguageNotRecordedException;
+import exceptions.*;
 
 public class ResumeOrganizer {
     private CodingLanguages languages;
@@ -32,19 +30,53 @@ public class ResumeOrganizer {
     }
 
     // add new project to projects and add the project to the used language
-    public void addProject(String projectName, String codingLanguage) throws LanguageNotRecordedException, LanguageAlreadyRecordedException {
+    // if language does not exist, create new entry of language and put the
+    public void addProject(String projectName, String codingLanguage) throws LanguageNotRecordedException,
+            LanguageAlreadyRecordedException, ProjectAlreadyRecordedException, ProjectNotRecordedException {
+
         projects.addProject(projectName, codingLanguage);
-        CodingLanguage language = languages.getLanguage(codingLanguage);
         Project myProject = projects.findProject(projectName);
-        if (language == null) {
+
+        if (!languages.containsLanguage(codingLanguage)) {
             languages.addLanguage(codingLanguage);
-            languages.getLanguage(codingLanguage).addProject(myProject);
-        } else {
-            language.addProject(myProject);
         }
+
+        languages.findLanguage(codingLanguage).addProject(myProject);
+    }
+
+    public CodingLanguage findLanguage(String language) throws LanguageNotRecordedException {
+        return languages.findLanguage(language);
+    }
+
+    public Description findExperience(HardSkillTags type, String name) throws ExperienceNotRecordedException {
+        if (type == HardSkillTags.WORKEXPERIENCE) {
+            return experiences.findWorkExperience(name);
+        } else if (type == HardSkillTags.VOLUNTEEREXPERIENCE) {
+            return experiences.findVolunteerExperience(name);
+        } else if (type == HardSkillTags.EXTRACURRICULARS) {
+            return experiences.findExtracurricular(name);
+        } else {
+            throw new ExperienceNotRecordedException();
+        }
+    }
+
+    public Project findProject(String projectName) throws ProjectNotRecordedException {
+        return projects.findProject(projectName);
     }
 
     public boolean allEmpty() {
         return languages.noLanguage() && experiences.allEmpty() && projects.noProject();
+    }
+
+    public CodingLanguages getLanguages() {
+        return languages;
+    }
+
+    public Experiences getExperiences() {
+        return experiences;
+    }
+
+    public Projects getProjects() {
+        return projects;
     }
 }

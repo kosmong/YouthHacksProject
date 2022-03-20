@@ -24,7 +24,7 @@ public class CodingLanguages {
         return codingLanguages.containsKey(language);
     }
 
-    public CodingLanguage getLanguage(String language) throws LanguageNotRecordedException{
+    public CodingLanguage findLanguage(String language) throws LanguageNotRecordedException{
         if (codingLanguages.get(language) == null) {
             throw new LanguageNotRecordedException();
         } else {
