@@ -55,4 +55,7 @@ public class Projects {
         return projects.isEmpty();
     }
 
+    public HashMap<Pair<String, String>, Project> getProjects() {
+        return projects;
+    }
 }

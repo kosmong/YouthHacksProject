@@ -50,7 +50,7 @@ public class RunResumeOrganizer extends JFrame implements ActionListener{
         } else if (e.getSource().equals(experiences)) {
             new ExperiencesFrame(organizer);
         } else if (e.getSource().equals(projects)) {
-            new ProjectsFrame();
+            new ProjectsFrame(organizer);
         }
     }
 

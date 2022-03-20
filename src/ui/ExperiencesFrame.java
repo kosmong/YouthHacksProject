@@ -24,7 +24,7 @@ public class ExperiencesFrame extends JFrame implements ActionListener{
     protected JList<String> experienceJList;
 
     public ExperiencesFrame(ResumeOrganizer organizer) {
-        super("Coding Languages");
+        super("Experiences");
         this.organizer = organizer;
         experienceModel = new DefaultListModel<>();
         putExperienceInList();

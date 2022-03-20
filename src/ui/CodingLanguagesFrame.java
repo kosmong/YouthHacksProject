@@ -28,24 +28,6 @@ public class CodingLanguagesFrame extends JFrame {
         languageModel = new DefaultListModel<>();
         putAllLangOnList();
 
-//        languageJList.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                JList list = (JList)e.getSource();
-//                if (e.getClickCount() == 2) {
-//                    int index = list.locationToIndex(e.getPoint());
-//                    String name = languageModel.elementAt(index);
-//                    try {
-//                        Description description = organizer.getLanguages().findLanguage(name).getDescription();
-//                        displayDescription(description);
-//                    } catch (LanguageNotRecordedException ex) {
-//                        ex.printStackTrace();
-//                    }
-//
-//                }
-//            }
-//        });
-
 
         initComponents();
 
