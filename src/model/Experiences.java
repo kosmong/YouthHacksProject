@@ -145,4 +145,15 @@ public class Experiences {
         return noWorkExperience() && noVolunteerExperience() && noExtracurriculars();
     }
 
+    public HashMap<Pair<String, String>, WorkExperience> getWorkExperience() {
+        return workExperience;
+    }
+
+    public HashMap<Pair<String, String>, VolunteerExperience> getVolunteerExperience() {
+        return volunteerExperience;
+    }
+
+    public HashMap<Pair<String, String>, Extracurricular> getExtracurriculars() {
+        return extracurriculars;
+    }
 }

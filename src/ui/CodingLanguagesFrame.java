@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CodingLanguagesFrame extends JFrame {
     protected final static int WIDTH = 600;
@@ -26,11 +28,28 @@ public class CodingLanguagesFrame extends JFrame {
         languageModel = new DefaultListModel<>();
         putAllLangOnList();
 
+//        languageJList.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                JList list = (JList)e.getSource();
+//                if (e.getClickCount() == 2) {
+//                    int index = list.locationToIndex(e.getPoint());
+//                    String name = languageModel.elementAt(index);
+//                    try {
+//                        Description description = organizer.getLanguages().findLanguage(name).getDescription();
+//                        displayDescription(description);
+//                    } catch (LanguageNotRecordedException ex) {
+//                        ex.printStackTrace();
+//                    }
+//
+//                }
+//            }
+//        });
+
 
         initComponents();
 
         setSize(WIDTH, HEIGHT);
-        //setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
 
@@ -52,6 +71,12 @@ public class CodingLanguagesFrame extends JFrame {
         languageJList = new JList<>(languageModel);
         languageJList.setPreferredSize(new Dimension(400, 360));
         add(languageJList);
+    }
+
+    protected void putAllLangOnList() {
+        for (String language: organizer.getLanguages().getCodingLanguages().keySet()) {
+            languageModel.addElement(language);
+        }
     }
 
     private class AddLanguage implements ActionListener {
@@ -123,6 +148,8 @@ public class CodingLanguagesFrame extends JFrame {
         parent.setJMenuBar(bar);
     }
 
+
+
     private class EditTime implements ActionListener {
         private Description d;
         private JFrame p;
@@ -134,6 +161,18 @@ public class CodingLanguagesFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            String year = JOptionPane.showInputDialog("Amount of experience in years");
+            String month = JOptionPane.showInputDialog("Amount experience in months");
+
+            try {
+                int y = Integer.parseInt(year);
+                int m = Integer.parseInt(month);
+                d.setTime(y, m);
+                p.dispose();
+                displayDescription(d);
+            } catch (NumberFormatException n) {
+                JOptionPane.showMessageDialog(null, "Please enter an integer!");
+            }
         }
     }
 
@@ -155,9 +194,4 @@ public class CodingLanguagesFrame extends JFrame {
         }
     }
 
-    protected void putAllLangOnList() {
-        for (String language: organizer.getLanguages().getCodingLanguages().keySet()) {
-            languageModel.addElement(language);
-        }
-    }
 }
